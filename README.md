@@ -91,7 +91,7 @@ epoch 312, acc_te=0.510259 acc_te_snt=0.974026
 epoch 320, acc_te=0.503742 acc_te_snt=0.966089
 ```
 
-WARNING: the results of this network are in terms of accuracy and not of error (as for the original network)
+WARNING: the results of this network are in terms of accuracy and not of error (as for the original network). 
 
 
 ## Where SincNet is implemented?

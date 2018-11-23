@@ -18,7 +18,7 @@ K.clear_session()
 from test import Validation
 
 
-def myGenerator(batch_size,data_folder,wav_lst,N_snt,wlen,lab_dict,fact_amp, out_dim):
+def batchGenerator(batch_size,data_folder,wav_lst,N_snt,wlen,lab_dict,fact_amp, out_dim):
     while True:
         sig_batch, lab_batch = create_batches_rnd(batch_size,data_folder,wav_lst,N_snt,wlen,lab_dict,fact_amp, out_dim)
         yield sig_batch, lab_batch
@@ -99,5 +99,5 @@ callbacks = [tb,checkpointer,validation]
 if pt_file!='none':
    model.load_weights(pt_file)
 
-train_generator = myGenerator(batch_size,data_folder,wav_lst_tr,snt_tr,wlen,lab_dict,0.2, out_dim)
+train_generator = batchGenerator(batch_size,data_folder,wav_lst_tr,snt_tr,wlen,lab_dict,0.2, out_dim)
 model.fit_generator(train_generator, steps_per_epoch=N_batches, epochs=N_epochs, verbose=1, callbacks=callbacks)
