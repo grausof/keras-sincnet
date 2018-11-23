@@ -59,6 +59,8 @@ The network might take several hours to converge (depending on the speed of your
 
 **3. Results.**
 
+<img src="https://github.com/grausof/keras-sincnet/blob/master/acc_loss_train.png" width="400" img align="left">
+
 The results are saved into the *output_folder* specified in the cfg file. In this folder, you can find a file (*res.res*) summarizing test accuracy. The model *checkpoints/SincNet.hdf5* is the SincNet model saved after the last iteration. 
 Tensorboard can be used to display the loss and accuracy on the train set with the following command:
 
@@ -90,7 +92,6 @@ epoch 320, acc_te=0.503742 acc_te_snt=0.966089
 
 WARNING: the results of this network are in terms of accuracy and not of error (as for the original network)
 
-<img src="https://github.com/grausof/keras-sincnet/blob/master/acc_loss_train.png" width="400" img align="left">
 
 ## Where SincNet is implemented?
 To take a look into the SincNet implementation you should open the file *sincnet.py* and read the classes *SincConv1D* and the function *sinc*.
