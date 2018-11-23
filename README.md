@@ -19,7 +19,7 @@ If you use this code or part of it, please cite the authors!
 
 
 ## Prerequisites
-- Linux
+- Linux / Mac
 - Python 3.6/2.7
 - keras 2.1.6
 - Tensorflow 1.10.0
@@ -106,7 +106,6 @@ To assign to each sentence the right label, you also have modify the dictionary 
 The labels are  specified within a python dictionary that contains sentence ids as keys (e.g., "*si1027*") and speaker_ids as values. Each speaker_id is an integer, ranging from 0 to N_spks-1. In the TIMIT dataset, you can easily retrieve the speaker id from the path (e.g., *train/dr1/fcjf0/si1027.wav* is the sentence_id "*si1027*" uttered by the speaker "*fcjf0*"). For other datasets, you should be able to retrieve in such a way this dictionary containing pairs of speaker and sentence ids.
 
 You should then modify the config file (*cfg/SincNet_TIMIT.cfg*) according to your new paths. Remember also to change the field "*class_lay=462*" according to the number of speakers N_spks you have in your dataset.
-
 
 
 ## References
