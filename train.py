@@ -86,9 +86,9 @@ model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics = ['
 
 
 
-tb = TensorBoard(log_dir=os.path.join('data','logs', 'SincNet'))
+tb = TensorBoard(log_dir=os.path.join(output_folder,'logs', 'SincNet'))
 checkpointer = ModelCheckpoint(
-        filepath=os.path.join('data', 'checkpoints',  'SincNet.hdf5'),
+        filepath=os.path.join(output_folder, 'checkpoints',  'SincNet.hdf5'),
         verbose=1,
         save_best_only=False)
 
