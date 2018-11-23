@@ -68,6 +68,28 @@ tensorboard --logdir=output_folder/logs
 
 Using the cfg file specified above, we obtain the following results:
 
+```
+epoch 0, acc_te=0.040379 acc_te_snt=0.059885
+epoch 8, acc_te=0.366254 acc_te_snt=0.810245
+epoch 16, acc_te=0.360024 acc_te_snt=0.782107
+epoch 24, acc_te=0.439231 acc_te_snt=0.915584
+epoch 32, acc_te=0.443118 acc_te_snt=0.914141
+epoch 40, acc_te=0.449710 acc_te_snt=0.921356
+epoch 48, acc_te=0.494441 acc_te_snt=0.955267
+epoch 56, acc_te=0.479593 acc_te_snt=0.949495
+epoch 64, acc_te=0.492353 acc_te_snt=0.961039
+epoch 72, acc_te=0.496025 acc_te_snt=0.960317
+....
+epoch 280, acc_te=0.514994 acc_te_snt=0.972583
+epoch 288, acc_te=0.508841 acc_te_snt=0.971861
+epoch 296, acc_te=0.524953 acc_te_snt=0.975469
+epoch 304, acc_te=0.507942 acc_te_snt=0.974026
+epoch 312, acc_te=0.510259 acc_te_snt=0.974026
+epoch 320, acc_te=0.503742 acc_te_snt=0.966089
+```
+
+WARNING: the results of this network are in terms of accuracy and not of error (as for the original network)
+
 <img src="https://github.com/grausof/keras-sincnet/blob/master/acc_loss_train.png" width="400" img align="left">
 
 ## Where SincNet is implemented?
@@ -87,4 +109,5 @@ You should then modify the config file (*cfg/SincNet_TIMIT.cfg*) according to yo
 
 ## References
 [1] SincNet original code written in PyTorch by the autor (https://github.com/mravanelli/SincNet)
+
 [2] Mirco Ravanelli, Yoshua Bengio, “Speaker Recognition from raw waveform with SincNet” [Arxiv](http://arxiv.org/abs/1808.00158)
