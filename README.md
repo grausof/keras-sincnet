@@ -1,5 +1,5 @@
 SincNet (M. Ravanelli - Y. Bengio) implementation using Keras Functional Framework v2+
-- Models are converted from original caffe networks.
+- Models are converted from original torch networks.
 - It supports only Tensorflow backend
 
 # SincNet
@@ -11,8 +11,8 @@ SincNet is a neural architecture for processing **raw audio samples**. It is a n
 
 [1] Mirco Ravanelli, Yoshua Bengio, “Speaker Recognition from raw waveform with SincNet” [Arxiv](http://arxiv.org/abs/1808.00158)
 
-## Cite us
-If you use this code or part of it, please cite us!
+## Cites the authors
+If you use this code or part of it, please cite the authors!
 
 *Mirco Ravanelli, Yoshua Bengio, “Speaker Recognition from raw waveform with SincNet”* [Arxiv](http://arxiv.org/abs/1808.00158)
 
