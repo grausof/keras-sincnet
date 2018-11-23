@@ -60,13 +60,13 @@ class Validation():
                 count_fr_tot=0
                 
                 
-                while end_samp<signal.shape[0]: #per ogni chunck
+                while end_samp<signal.shape[0]: #for each chunck
                     sig_arr[count_fr,:]=signal[beg_samp:end_samp]
                     beg_samp=beg_samp+wshift
                     end_samp=beg_samp+wlen
                     count_fr=count_fr+1
                     count_fr_tot=count_fr_tot+1
-                    if count_fr==Batch_dev: #Se raggiungo la dimensione del batch faccio la predict
+                    if count_fr==Batch_dev: 
                         a,b = np.shape(sig_arr)
                         inp = sig_arr.reshape(a,b,1)
                         inp = np.array(inp)
@@ -74,7 +74,7 @@ class Validation():
                         count_fr=0
                         sig_arr=np.zeros([Batch_dev,wlen])
 
-                #Aggiungo gli ultimi elementi rimasti  e faccio la predict
+                #Add the last items left 
                 if count_fr>0:
                     inp = sig_arr[0:count_fr]
                     a,b = np.shape(inp)
@@ -82,11 +82,11 @@ class Validation():
                     inp = np.array(inp)
                     pout[count_fr_tot-count_fr:count_fr_tot,:] = self.model.predict(inp, verbose=0)
 
-                #Prediction per ogni chunkc  e calcolo errore medio
+                #Prediction for each chunkc  and calculation of average error
                 pred = np.argmax(pout, axis=1)
                 err = np.mean(pred!=lab)
                 
-                #Calcolo l'accuratezza sull'intera frase
+                #Calculate accuracy on the whole sentence
                 best_class = np.argmax(np.sum(pout, axis=0))
 
                 err_sum_snt = err_sum_snt+float((best_class!=lab[0]))
@@ -100,7 +100,7 @@ class Validation():
                     pbar.set_description('acc: {}, acc_snt: {}'.format(temp_acc, temp_acc_stn))
                     pbar.update(1)
 
-            #Accuratezza media
+            #average accuracy
             acc = 1-(err_sum/snt_te)
             acc_snt = 1-(err_sum_snt/snt_te)
             if debug:
