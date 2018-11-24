@@ -85,12 +85,17 @@ model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics = ['
 
 
 
+checkpoints_path = os.path.join(output_folder,'checkpoints')
 
 tb = TensorBoard(log_dir=os.path.join(output_folder,'logs', 'SincNet'))
 checkpointer = ModelCheckpoint(
-        filepath=os.path.join(output_folder, 'checkpoints',  'SincNet.hdf5'),
+        filepath=os.path.join(checkpoints_path,  'SincNet.hdf5'),
         verbose=1,
         save_best_only=False)
+
+if not os.path.exists(checkpoints_path):
+    os.makedirs(checkpoints_path)
+
 
 validation = ValidationCallback(Batch_dev, data_folder, lab_dict, wav_lst_te, wlen, wshift, class_lay)
 callbacks = [tb,checkpointer,validation]
