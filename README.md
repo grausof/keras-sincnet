@@ -23,6 +23,7 @@ If you use this code or part of it, please cite the authors!
 - Python 3.6/2.7
 - keras 2.1.6
 - Tensorflow 1.10.0
+- tqdm (``` pip install tqdm```)
 - pysoundfile (``` pip install pysoundfile```)
 
 ## How to run a TIMIT experiment
