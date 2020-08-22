@@ -72,10 +72,10 @@ wshift=int(fs*cw_shift/1000.00)
 Batch_dev=128
 
 # Loading label dictionary
-lab_dict=np.load(class_dict_file).item()
+lab_dict=np.load(class_dict_file, allow_pickle=True).item()
 
 
 # Initialization of the minibatch (batch_size,[0=>x_t,1=>x_t+N,1=>random_samp])
-sig_batch=np.zeros([batch_size,wlen])
+sig_batch=np.zeros([batch_size,wlen]),
 lab_batch=np.zeros(batch_size)
 out_dim = class_lay[0]
