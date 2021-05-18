@@ -17,6 +17,16 @@ class LayerNorm(Layer):
         self.scale_initializer = initializers.get(scale_initializer)
         self.bias_initializer = initializers.get(bias_initializer)
 
+    # overriding get_config function as __init__ function has positional arguements
+    def get_config(self):
+        return {"scale_initializer": self.scale_initializer,
+                "bias_initializer": self.bias_initializer}
+
+    @classmethod
+    def from_config(cls, config):
+        return cls(**config)
+
+    
     def build(self, input_shape):
         self.scale = self.add_weight(shape=(input_shape[-1],),
                                      initializer=self.scale_initializer,
@@ -57,6 +67,16 @@ class SincConv1D(Layer):
 
         super(SincConv1D, self).__init__(**kwargs)
 
+    # overriding get_config method as __init__ function has positional arguements
+    def get_config(self):
+        return {"N_filt": self.N_filt,
+                "Filt_dim": self.Filt_dim,
+                "fs":self.fs}
+
+    @classmethod
+    def from_config(cls, config):
+        return cls(**config)
+
     def build(self, input_shape):
         # The filters are trainable parameters.
         self.filt_b1 = self.add_weight(
@@ -92,12 +112,16 @@ class SincConv1D(Layer):
         n = np.linspace(0, self.Filt_dim, self.Filt_dim)
         window = 0.54 - 0.46 * K.cos(2 * math.pi * n / self.Filt_dim)
         window = K.cast(window, "float32")
-        self.window = K.variable(window)
+
+        # specifying unique name to the variable to fix issue while saving the model
+        self.window = K.variable(window, name='window')
         debug_print("  window", self.window.shape)
 
         # TODO what is this?
         t_right_linspace = np.linspace(1, (self.Filt_dim - 1) / 2, int((self.Filt_dim - 1) / 2))
-        self.t_right = K.variable(t_right_linspace / self.fs)
+
+        # specifying unique name to the variable to fix issue while saving the model
+        self.t_right = K.variable(t_right_linspace / self.fs, name='t_right')
         debug_print("  t_right", self.t_right)
 
         super(SincConv1D, self).build(input_shape)  # Be sure to call this at the end
@@ -151,9 +175,12 @@ class SincConv1D(Layer):
         return (input_shape[0],) + (new_size,) + (self.N_filt,)
 
 
+# defining variable outside function to fix the following error
+# 'ValueError: A tf.Variable created inside your tf.function has been garbage-collected.'
+v = K.variable(K.ones(1))
 def sinc(band, t_right):
     y_right = K.sin(2 * math.pi * band * t_right) / (2 * math.pi * band * t_right)
     # y_left = flip(y_right, 0) TODO remove if useless
     y_left = K.reverse(y_right, 0)
-    y = K.concatenate([y_left, K.variable(K.ones(1)), y_right])
+    y = K.concatenate([y_left, v, y_right])
     return y
